@@ -21,9 +21,7 @@ jobs:
         with:
           python-version: 3.x
       - name: Run flake8
-        uses: julianwachholz/flake8-action@v1.1.0
+        uses: liskin/gh-problem-matcher-wrap@v1
         with:
-          checkName: "Python Lint"
-          path: django_saml2_auth_lw
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          linters: flake8
+          run: flake8 django_saml2_auth_lw/ # run flake8 to source files
