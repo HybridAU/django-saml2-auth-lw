@@ -15,7 +15,7 @@ jobs:
         id: wait-for-ci
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          checkName: success
+          checkName: Linting # Wait for Linting
       - name: Exit if CI did not succeed
         if: steps.wait-for-ci.outputs.conclusion != 'success'
         run: exit 1
