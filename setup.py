@@ -14,7 +14,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name='django_saml2_auth-lw',
+    name='django_saml2_auth_lw',
 
     version='2.2.1',
 
