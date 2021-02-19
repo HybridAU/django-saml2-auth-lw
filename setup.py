@@ -17,6 +17,9 @@ setup(
     name='django_saml2_auth_lw',
     description='Django SAML2 Authentication Made Easy. Easily integrate with SAML2 SSO identity providers like Okta',
     long_description=long_description,
+    long_description_content_type='text/markdown',
+    use_scm_version=True,
+    setup_requires=['setuptools_scm'],
 
     url='https://github.com/Lotterywest/django-saml2-auth-lw',
 
