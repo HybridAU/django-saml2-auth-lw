@@ -2,7 +2,7 @@
 
 By Lotterywest GoRillas Team
 
-Version: Use 1.1.4 for Django <=1.9, 2.x.x for Django >= 1.9, Latest supported django version is 2.1
+Version: Use 1.1.4 for Django <=1.9, 2.x.x for Django >= 1.9, Latest supported django version is 3.1
 
 This project aims to provide a dead simple way to integrate SAML2
 Authentication into your Django powered app. Try it now, and get rid of the
@@ -10,6 +10,8 @@ complicated configuration of SAML.
 
 Any SAML2 based SSO(Single-Sign-On) identity provider with dynamic metadata
 configuration is supported by this Django plugin, for example Okta.
+
+Lotterywest GoRillas Team has forked this project from [here](https://github.com/fangli/django-saml2-auth) to be able to extend the functionality of the repository that is no longer maintained.
 
 ## Dependencies
 

@@ -23,8 +23,8 @@ setup(
 
     url='https://github.com/Lotterywest/django-saml2-auth-lw',
 
-    author='Lotterywest GoRillas Team',
-    author_email='Gorillas@lotterywest.wa.gov.au',
+    author='Fang Li, Lotterywest GoRillas Team',
+    author_email='surivlee+djsaml2auth@gmail.com, Gorillas@lotterywest.wa.gov.au',
 
     license='Apache 2.0',
 
