@@ -24,16 +24,9 @@ from django.utils.http import is_safe_url
 
 from rest_auth.utils import jwt_encode
 
-
 # default User or custom User. Now both will work.
 User = get_user_model()
 
-try:
-    import urllib2 as _urllib
-except:
-    import urllib.request as _urllib
-    import urllib.error
-    import urllib.parse
 
 if parse_version(get_version()) >= parse_version('1.7'):
     from django.utils.module_loading import import_string
@@ -69,9 +62,12 @@ def get_reverse(objs):
     for obj in objs:
         try:
             return reverse(obj)
-        except:
+        except Exception:
             pass
-    raise Exception('We got a URL reverse issue: %s. This is a known issue but please still submit a ticket at https://github.com/fangli/django-saml2-auth/issues/new' % str(objs))
+    raise Exception(f"""
+    We got a URL reverse issue: {str(objs)}.
+    This is a known issue but please still submit a ticket at https://github.com/fangli/django-saml2-auth/issues/new
+    """)
 
 
 def _get_metadata():
@@ -141,7 +137,8 @@ def _create_new_user(username, email, firstname, lastname):
     user = User.objects.create_user(username, email)
     user.first_name = firstname
     user.last_name = lastname
-    groups = [Group.objects.get(name=x) for x in settings.SAML2_AUTH.get('NEW_USER_PROFILE', {}).get('USER_GROUPS', [])]
+    groups = [Group.objects.get(name=x) for x in settings.SAML2_AUTH.get(
+        'NEW_USER_PROFILE', {}).get('USER_GROUPS', [])]
     if parse_version(get_version()) >= parse_version('2.0'):
         user.groups.set(groups)
     else:
@@ -184,8 +181,9 @@ def acs(r):
         if settings.SAML2_AUTH.get('TRIGGER', {}).get('BEFORE_LOGIN', None):
             import_string(settings.SAML2_AUTH['TRIGGER']['BEFORE_LOGIN'])(user_identity)
     except User.DoesNotExist:
-        new_user_should_be_created = settings.SAML2_AUTH.get('CREATE_USER', True)
-        if new_user_should_be_created: 
+        new_user_should_be_created = settings.SAML2_AUTH.get(
+            'CREATE_USER', True)
+        if new_user_should_be_created:
             target_user = _create_new_user(user_name, user_email, user_first_name, user_last_name)
             if settings.SAML2_AUTH.get('TRIGGER', {}).get('CREATE_USER', None):
                 import_string(settings.SAML2_AUTH['TRIGGER']['CREATE_USER'])(user_identity)
@@ -209,7 +207,7 @@ def acs(r):
         frontend_url = settings.SAML2_AUTH.get(
             'FRONTEND_URL', next_url)
 
-        return HttpResponseRedirect(frontend_url+query)
+        return HttpResponseRedirect(frontend_url + query)
 
     if is_new_user:
         try:
@@ -224,15 +222,16 @@ def signin(r):
     try:
         import urlparse as _urlparse
         from urllib import unquote
-    except:
+    except Exception:
         import urllib.parse as _urlparse
         from urllib.parse import unquote
     next_url = r.GET.get('next', _default_next_url())
 
     try:
         if 'next=' in unquote(next_url):
-            next_url = _urlparse.parse_qs(_urlparse.urlparse(unquote(next_url)).query)['next'][0]
-    except:
+            next_url = _urlparse.parse_qs(
+                _urlparse.urlparse(unquote(next_url)).query)['next'][0]
+    except Exception:
         next_url = r.GET.get('next', _default_next_url())
 
     # Only permit signin requests where the next_url is a safe URL
