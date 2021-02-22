@@ -25,6 +25,7 @@ from django.utils.http import is_safe_url
 # default User or custom User. Now both will work.
 User = get_user_model()
 
+
 def jwt_encode(user):
     """
     This function is copy pasted from https://github.com/Tivix/django-rest-auth/blob/master/rest_auth/utils.py#L19-L29
