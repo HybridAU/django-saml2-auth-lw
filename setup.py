@@ -61,7 +61,6 @@ setup(
     packages=find_packages(),
 
     install_requires=['pysaml2>=4.5.0',
-                      'drf-jwt',
-                      'django-rest-auth', ],
+                      'drf-jwt'],
     include_package_data=True,
 )

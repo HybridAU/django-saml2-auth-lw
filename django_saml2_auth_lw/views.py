@@ -22,10 +22,22 @@ from django.template import TemplateDoesNotExist
 from django.http import HttpResponseRedirect
 from django.utils.http import is_safe_url
 
-from rest_auth.utils import jwt_encode
-
 # default User or custom User. Now both will work.
 User = get_user_model()
+
+# This function is copy pasted from https://github.com/Tivix/django-rest-auth/blob/master/rest_auth/utils.py#L19-L29
+# to remove the need to write `from rest_auth.utils import jwt_encode`
+def jwt_encode(user):
+    try:
+        from rest_framework_jwt.settings import api_settings
+    except ImportError:
+        raise ImportError("djangorestframework_jwt needs to be installed")
+
+    jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+    jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
+
+    payload = jwt_payload_handler(user)
+    return jwt_encode_handler(payload)
 
 
 if parse_version(get_version()) >= parse_version('1.7'):
