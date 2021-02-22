@@ -27,6 +27,8 @@ User = get_user_model()
 
 # This function is copy pasted from https://github.com/Tivix/django-rest-auth/blob/master/rest_auth/utils.py#L19-L29
 # to remove the need to write `from rest_auth.utils import jwt_encode`
+
+
 def jwt_encode(user):
     try:
         from rest_framework_jwt.settings import api_settings
