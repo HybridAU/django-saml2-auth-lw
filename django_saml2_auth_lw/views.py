@@ -31,7 +31,8 @@ def jwt_encode(user):
     This function is copy pasted from https://github.com/Tivix/django-rest-auth/blob/master/rest_auth/utils.py#L19-L29
     to remove the need to write `from rest_auth.utils import jwt_encode` and the dependency `django-rest-auth`
 
-    django-saml2-auth Only used that library for JWT encode which can be easily incorporated to our source code because is an isolated function from django-rest-auth.
+    django-saml2-auth Only used that library for JWT encode which can be easily incorporated to our source code
+    because is an isolated function from django-rest-auth.
     """
     try:
         from rest_framework_jwt.settings import api_settings
